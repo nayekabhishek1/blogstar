@@ -8,22 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nayek.blogstar.dto.LoginRequest;
 import com.nayek.blogstar.dto.RegisterRequest;
 import com.nayek.blogstar.service.AuthService;
-
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-	
+
 	@Autowired
 	private AuthService authService;
-	
+
 	@PostMapping("/signup")
-	public ResponseEntity signup(@RequestBody RegisterRequest registerRequest)
-	{
+	public ResponseEntity signup(@RequestBody RegisterRequest registerRequest) {
 		authService.signup(registerRequest);
 		return new ResponseEntity(HttpStatus.OK);
-		
+
+	}
+
+	@PostMapping("/login")
+	public String login(@RequestBody LoginRequest loginRequest) {
+		return authService.login(loginRequest);
 	}
 }

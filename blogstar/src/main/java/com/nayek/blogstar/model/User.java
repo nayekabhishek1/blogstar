@@ -10,17 +10,17 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String username;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private String email;
 
@@ -55,7 +55,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
+
 }
