@@ -1,2 +1,2 @@
 # blogstar
-This is blog application in Spring Boot
+This is blog application in Spring Boot and Angular.
