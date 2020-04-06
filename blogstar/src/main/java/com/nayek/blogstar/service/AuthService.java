@@ -1,5 +1,7 @@
 package com.nayek.blogstar.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,6 +50,12 @@ public class AuthService {
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		return jwtUtility.generateToken(authentication);
+	}
+
+	public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
+		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		return Optional.of(principal);
 	}
 
 }
