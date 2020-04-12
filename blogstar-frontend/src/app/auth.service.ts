@@ -11,24 +11,29 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  
+
 
 
   private url = 'http://localhost:8082/api/auth/';
 
-  constructor(private httpClient: HttpClient, private localStorageService:LocalStorageService) {
+  constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
 
   }
 
-   register(registerModel: RegisterModel): Observable<any> {
+  register(registerModel: RegisterModel): Observable<any> {
     return this.httpClient.post(this.url + 'signup', registerModel);
   }
 
   login(loginModel: LoginModel): Observable<boolean> {
-    return this.httpClient.post<JWTAuthResponse>(this.url + 'login', loginModel).pipe(map(data =>{
-      this.localStorageService.store('authenticationToken',data.authenticationToken);
-      this.localStorageService.store('username',data.username);
+    return this.httpClient.post<JWTAuthResponse>(this.url + 'login', loginModel).pipe(map(data => {
+      this.localStorageService.store('authenticationToken', data.authenticationToken);
+      this.localStorageService.store('username', data.username);
       return true;
     }));
+  }
+
+
+  public isAuthenticated(): boolean {
+    return this.localStorageService.retrieve('username') != null;
   }
 }

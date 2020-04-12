@@ -23,7 +23,7 @@ public class PostController {
 	private PostService postService;
 
 	@SuppressWarnings("rawtypes")
-	@PostMapping
+	@PostMapping("/create")
 	public ResponseEntity createPost(@RequestBody PostDto postDto) {
 		postService.createPost(postDto);
 		return new ResponseEntity(HttpStatus.OK);
@@ -33,6 +33,7 @@ public class PostController {
 	public ResponseEntity<List<PostDto>> showAllPosts() {
 		return new ResponseEntity<>(postService.showAllPosts(), HttpStatus.OK);
 	}
+
 
 	@GetMapping("/all/{id}")
 	public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
